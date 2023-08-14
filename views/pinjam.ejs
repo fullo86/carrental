@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row mt-4">
+        <h1>Daftar Peminjaman Kendaraan</h1>
+        <div class="col-md-12">
+            <a href="/pinjam/create" class="btn btn-primary">Tambah Data</a>
+            <br></br>
+            <% if (msg.length !== 0) { %>
+                <div class="alert alert-success" role="alert">
+                    <%= msg %> 
+                </div>                  
+            <% } %>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">No Hp</th>
+                    <th scope="col">Kendaraan</th>
+                    <th scope="col">No Polisi</th>
+                    <th scope="col">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% let no = 1 %> 
+                    <% load.forEach(x => { %>
+                        <tr>
+                            <th scope="row"><%= no++ %> </th>
+                            <td><%= x.nama %> </td>
+                            <td><%= x.nohp %> </td>
+                            <td><%= x.kendaraan %></td>
+                            <td><%= x.nopol %></td>
+                            <td>
+                                <a href="/pinjam/edit/<%= x.nama %>" class="btn badge text-bg-info">Ubah</a>
+                                <!-- <a href="/pinjam/<%= x.nama %>" class="btn badge text-bg-warning">Details</a> -->
+                                <a href="/pinjam/delete/<%= x.nama %>" class="btn badge text-bg-danger" onclick="return confirm('Yakin Mau Dihapus ?')">Hapus</a>
+                            </td>
+                          </tr>                         
+                    <% }) %>
+                </tbody>
+              </table>    
+        </div>
+    </div>
+</div>

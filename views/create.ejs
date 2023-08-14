@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-8">
+      <h1>Tambah Data Peminjaman</h1>
+      <form method="post" action="/pinjam">
+        <% if (typeof errors != 'undefined') { %>
+        <div class="alert alert-danger" role="alert">
+          <ul>
+            <% errors.forEach(error => { %>
+            <li><%= error.msg %></li>
+            <% }) %>
+          </ul>
+        </div>
+        <% } %>
+        <div class="mb-3">
+          <label for="nama" class="form-label">Nama</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nama"
+            name="nama"
+            placeholder="Masukan Nama"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="nohp" class="form-label">No Hp</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nohp"
+            name="nohp"
+            placeholder="Masukan No Hp"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="kendaraan" class="form-label">Kendaraan</label>
+          <select class="form-select" id="kendaraan" name="kendaraan" onchange="fillNopol()">
+            <option value="" selected>Pilih Kendaraan</option>
+            <option value="Honda Mobilio">Honda Mobilio</option>
+            <option value="Toyota Avanza">Toyota Avanza</option>
+            <option value="Daihatsu Granmax">Daihatsu Granmax</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="nohp" class="form-label">No Polisi</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nopol"
+            name="nopol"
+            disabled
+          />
+        </div>
+        <a href="/pinjam" type="button" class="btn btn-primary col-md-5"
+          >Batal</a
+        >
+        <button type="submit" class="btn btn-primary col-md-5 offset-1">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<script>
+function fillNopol() {
+  const kendaraanSelect = document.getElementById("kendaraan");
+  const nopolInput = document.getElementById("nopol");
+
+  const selectedKendaraan = kendaraanSelect.value;
+
+  // Mapping kendaraan dengan nomor polisi
+  const kendaraanNopolMap = {
+    "Honda Mobilio": "B 3774 PPU",
+    "Toyota Avanza": "B 8441 SIF",
+    "Daihatsu Granmax": "B 9932 DWO"
+    };
+
+  if (selectedKendaraan in kendaraanNopolMap) {
+    nopolInput.value = kendaraanNopolMap[selectedKendaraan];
+  } else {
+    nopolInput.value = "";
+  }
+}
+</script>
